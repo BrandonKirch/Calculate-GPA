@@ -38,6 +38,7 @@ public class MyClass {
     public static int numberClassesMethod(Scanner in){
         System.out.println("How many classes are you taking?");
         int classes = in.nextInt();
+        
         return classes;
     }
     
@@ -46,9 +47,11 @@ public class MyClass {
         for (int i = 0; i < classes; i++){
             System.out.println("What is the name of your class?");
             courseName[i]=in.nextLine();
+            
             System.out.println("How many credits is the course worth?");
             in.nextLine();
             credits[i]=in.nextInt();
+            
             System.out.println("What is your grade in the course?");
             grade[i]=in.nextDouble();
         }
