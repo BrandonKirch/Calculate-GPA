@@ -1,0 +1,71 @@
+/*
+ * This program will ask the user to input the number of classes as well as relevant information in the classes
+ * in order to calculate and return the GPA to the user.
+ * 
+ * @author: Brandon Kirch
+ * @version: 9/6/2022
+*/ 
+
+import java.util.Scanner;
+
+public class MyClass {
+    public static void main(String args[]) {
+      //instantiate the scanner
+      Scanner in = new Scanner(System.in);
+      
+      //call the method to determine user's number of classes
+      int classes = numberClassesMethod(in);
+      
+      //create neccessary arrays
+      String[] courseName = new String[classes];
+      int[] credits = new int[classes];
+      double[] grade = new double[classes];
+      
+      //fill arrays with information
+      classInfoMethod(courseName, credits, grade, classes, in);
+      
+      //calculate the GPA
+      double gpa = gpaMethod(credits, grade, classes);
+      
+      //output the GPA to two decimal places
+      System.out.println(Math.round(gpa*100.0)/100.0);
+      
+      //close scanner
+      in.close();
+    }
+    
+    //this method asks the user how many courses they are taking and returns the info
+    public static int numberClassesMethod(Scanner in){
+        System.out.println("How many classes are you taking?");
+        int classes = in.nextInt();
+        return classes;
+    }
+    
+    //this method uses a for loop to fill out appropriate sized arrays for the classes being taken
+    public static void classInfoMethod(String[] courseName, int[] credits, double[] grade, int classes, Scanner in){
+        for (int i = 0; i < classes; i++){
+            System.out.println("What is the name of your class?");
+            courseName[i]=in.nextLine();
+            System.out.println("How many credits is the course worth?");
+            in.nextLine();
+            credits[i]=in.nextInt();
+            System.out.println("What is your grade in the course?");
+            grade[i]=in.nextDouble();
+        }
+    }
+    
+    //this method will calculate and return the gpa earned base on given information
+    public static double gpaMethod(int[] credits, double[] grade, int classes){
+        double qualityPoints = 0.0;
+        int totalCredits = 0;
+        
+        for (int i = 0; i < classes; i ++){
+            qualityPoints = qualityPoints + (credits[i] * grade[i]);
+            totalCredits = totalCredits + credits[i];
+        }
+        
+        double gpa = qualityPoints / totalCredits;
+        
+        return gpa;
+    }
+}
